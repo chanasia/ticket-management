@@ -1,37 +1,40 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, HttpStatus, HttpCode, Put, Query } from '@nestjs/common';
 import { TicketsService } from './tickets.service';
+import { create } from 'domain';
+import { CreateTicketDto } from './dto/create-ticket.dto';
+import { Ticket, TicketStatus } from './entities/ticket.entity';
+import { GetAllTicketsQueryDto } from './dto/get-all-ticket-query.dto';
+import { TicketDto } from './dto/ticket.dto';
 
 @Controller('tickets')
 export class TicketsController {
-  constructor(private readonly ticketsService: TicketsService) {}
+  constructor(private readonly ticketsService: TicketsService) { }
 
-  @Get('GetAll')
-  async getAllTickets() {
-    
+  @Get('get-all')
+async getAllTickets(@Query() query: GetAllTicketsQueryDto): Promise<TicketDto[]> {
+  return this.ticketsService.getAllTickets(query.sortBy, query.sortOrder, query.status);
+}
+
+  @Post('create')
+  async createTicket(@Body() createTicketDto: CreateTicketDto): Promise<TicketDto> {
+    return this.ticketsService.createTicketAsync(createTicketDto);
   }
 
-  // @Post()
-  // create(@Body() createTicketDto: CreateTicketDto) {
-  //   return this.ticketsService.create(createTicketDto);
-  // }
+  @Put(':ticket_id/accept')
+  @HttpCode(HttpStatus.OK)
+  async acceptTicket(@Param('ticket_id') ticket_id: string): Promise<TicketDto> {
+    return this.ticketsService.updateStatusByTicketIdAsync(ticket_id, TicketStatus.ACCEPTED);
+  }
 
-  // @Get()
-  // findAll() {
-  //   return this.ticketsService.findAll();
-  // }
+  @Put(':ticket_id/reject')
+  @HttpCode(HttpStatus.OK)
+  async rejectTicket(@Param('ticket_id') ticket_id: string): Promise<TicketDto> {
+    return this.ticketsService.updateStatusByTicketIdAsync(ticket_id, TicketStatus.REJECTED);
+  }
 
-  // @Get(':id')
-  // findOne(@Param('id') id: string) {
-  //   return this.ticketsService.findOne(+id);
-  // }
-
-  // @Patch(':id')
-  // update(@Param('id') id: string, @Body() updateTicketDto: UpdateTicketDto) {
-  //   return this.ticketsService.update(+id, updateTicketDto);
-  // }
-
-  // @Delete(':id')
-  // remove(@Param('id') id: string) {
-  //   return this.ticketsService.remove(+id);
-  // }
+  @Put(':ticket_id/resolve')
+  @HttpCode(HttpStatus.OK)
+  async resolveTicket(@Param('ticket_id') ticket_id: string): Promise<TicketDto> {
+    return this.ticketsService.updateStatusByTicketIdAsync(ticket_id, TicketStatus.RESOLVED);
+  }
 }

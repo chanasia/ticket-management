@@ -1,0 +1,17 @@
+[
+  {
+    "title": "API rate limit exceeded",
+    "description": "Third-party API calls are being rate limited, causing service disruption in payment processing",
+    "contact": "alex.kim@example.com"
+  },
+  {
+    "title": "Email notifications not working",
+    "description": "System email notifications stopped working since yesterday, users not receiving alerts",
+    "contact": "tom.wilson@example.com"
+  },
+  {
+    "title": "Request for VPN access",
+    "description": "Need VPN access for remote work, require access to internal development servers",
+    "contact": "robert.garcia@example.com"
+  }
+]
