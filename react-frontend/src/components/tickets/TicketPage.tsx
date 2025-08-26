@@ -17,8 +17,8 @@ export default function TicketPage({ }: Props) {
   const [showCreateModal, setShowCreateModal] = useState<boolean>(false);
 
   const { tickets, loading: ticketLoading, refetch: ticketRefetch } = useTickets({ statusFilter, sortOrder });
-  const { createTicket, loading: createLoading } = useCreateTicket();
-  const { updateTicketStatus, loading: updateLoading } = useUpdateTicketStatus();
+  const { createTicket } = useCreateTicket();
+  const { updateTicketStatus } = useUpdateTicketStatus();
 
   const handleStatusFilterChange = (status: string) => {
     setStatusFilter(status);

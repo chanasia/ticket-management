@@ -1,8 +1,8 @@
 name: ticket-management
 
 services:
-  postgres:
-    container_name: postgres
+  postgresdb:
+    container_name: postgresdb
     image: postgres:17
     ports:
       - "5436:5432"
@@ -12,6 +12,37 @@ services:
       POSTGRES_DB: ticketdb
     volumes:
       - postgres-data:/var/lib/postgresql/data
+
+  nestjs-backend:
+    container_name: nestjs-backend
+    build: 
+      context: ./nestjs-backend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - BACKEND_PORT=3000
+      - DB_HOST=postgresdb
+      - DB_PORT=5432
+      - DB_USERNAME=useradmin
+      - DB_PASSWORD=abc12345
+      - DB_NAME=ticketdb
+      - FRONTEND_URL=http://localhost
+    depends_on:
+      - postgresdb
+
+  react-frontend:
+    container_name: react-frontend
+    build: 
+      context: ./react-frontend
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    environment:
+      - VITE_API_BASE_URL=http://localhost:3000
+    depends_on:
+      - postgresdb
+      - nestjs-backend
 
 volumes:
   postgres-data:
