@@ -1,0 +1,11 @@
+INSERT INTO tickets (title, description, contact, status, created_at, updated_at) VALUES
+('Cannot login to system', 'User reports unable to access the dashboard after entering correct credentials. Error message shows Invalid login.', 'john.doe@example.com', 'pending', '2024-08-20 09:30:00', '2024-08-20 09:30:00'),
+('Slow loading pages', 'Website takes more than 30 seconds to load. This affects user experience significantly.', 'jane.smith@example.com', 'accepted', '2024-08-19 14:20:00', '2024-08-21 08:15:00'),
+('Email notifications not working', 'Users are not receiving email notifications for important updates.', 'support@example.com', 'resolved', '2024-08-18 11:45:00', '2024-08-22 16:30:00'),
+('Database connection timeout', 'Application frequently loses database connection causing data loss and user frustration.', 'admin@example.com', 'rejected', '2024-08-17 16:10:00', '2024-08-17 16:10:00'),
+('Mobile app crashes on startup', 'iOS app crashes immediately after opening. Affects approximately 15 percent of users.', 'mobile.user@example.com', 'accepted', '2024-08-16 13:25:00', '2024-08-23 10:30:00'),
+('Payment processing error', 'Credit card payments fail with error code 500. Users unable to complete purchases.', 'billing@example.com', 'pending', '2024-08-15 08:45:00', '2024-08-15 08:45:00'),
+('Search functionality broken', 'Search results return empty even when matching records exist in the database.', 'user.experience@example.com', 'resolved', '2024-08-14 15:20:00', '2024-08-24 14:45:00'),
+('File upload size limit exceeded', 'Users cannot upload files larger than 5MB. Need to increase limit to 25MB.', 'content.manager@example.com', 'rejected', '2024-08-13 12:15:00', '2024-08-14 09:30:00'),
+('API rate limiting too aggressive', 'Third-party integrations failing due to strict rate limits. Need to adjust thresholds.', 'api.developer@example.com', 'pending', '2024-08-12 10:40:00', '2024-08-12 10:40:00'),
+('User profile update fails', 'Users cannot save changes to their profile information. Form submission returns validation errors.', 'profile.user@example.com', 'resolved', '2024-08-11 14:55:00', '2024-08-25 11:20:00');

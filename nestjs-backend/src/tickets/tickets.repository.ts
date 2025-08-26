@@ -20,7 +20,7 @@ export class TicketsRepository {
     sortOrder?: 'ASC' | 'DESC',
     status?: TicketStatus
   ): Promise<Ticket[]> {
-    const queryBuilder = this.ticketRepository.createQueryBuilder();
+    const queryBuilder = this.ticketRepository.createQueryBuilder('ticket');
 
     if (status) {
       queryBuilder.where('ticket.status = :status', { status });
@@ -28,6 +28,8 @@ export class TicketsRepository {
 
     if (sortBy === 'updated_at') {
       queryBuilder.orderBy('ticket.updated_at', sortOrder || 'DESC');
+    } else {
+      queryBuilder.orderBy('ticket.created_at', 'DESC');
     }
 
     return queryBuilder.getMany();
